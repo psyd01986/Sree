@@ -4,8 +4,10 @@ WORKDIR /sree
 COPY ["static", "/sree/static"]
 COPY ["xmlparser.py", "app.py", "/sree/"]
 
-RUN yum install -y epel-release
-RUN yum install -y python2-pip
-RUN pip install flask requests
+RUN yum update -y &&\
+    yum install -y epel-release &&\
+    yum install -y python3-pip &&\
+    pip3 install --upgrade pip --user &&\    
+    pip3 install flask requests
 
-ENTRYPOINT ["python", "/sree/app.py"]
+ENTRYPOINT ["python3.6", "/sree/app.py"]
